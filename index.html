@@ -191,6 +191,15 @@
                             </div>
 
                             <div class="setting-row">
+                                <label>Logo</label>
+                                <input
+                                    type="file"
+                                    id="logoInput"
+                                    accept="image/*"
+                                />
+                            </div>
+
+                            <div class="setting-row">
                                 <label>Dot Style</label>
                                 <select id="dotStyle">
                                     <option value="square">Square</option>
@@ -208,6 +217,24 @@
                                     <option value="extra-rounded">
                                         Extra Rounded
                                     </option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <!-- Export Subsection -->
+                        <div class="subsection">
+                            <h3 class="subsection-title">Export Settings</h3>
+                            <div class="setting-row">
+                                <label>Resolution (Scale)</label>
+                                <select id="resolutionScale">
+                                    <option value="1">1x (Low)</option>
+                                    <option value="2">2x (Medium)</option>
+                                    <option value="4" selected>
+                                        4x (High)
+                                    </option>
+                                    <option value="8">8x (Ultra)</option>
                                 </select>
                             </div>
                         </div>
@@ -240,6 +267,10 @@
                             <button id="downloadBtn" class="btn primary">
                                 <i class="fa-solid fa-download"></i> Download
                                 Image
+                            </button>
+                            <button id="downloadVcfBtn" class="btn secondary">
+                                <i class="fa-solid fa-file-export"></i> Download
+                                VCF
                             </button>
                             <button id="printBtn" class="btn secondary">
                                 <i class="fa-solid fa-print"></i> Print

@@ -45,8 +45,7 @@ function setupFrameButtons() {
     });
 }
 
-function updateQR() {
-    // 1. Get Contact values
+function getVCardData() {
     const fn = document.getElementById("firstName").value.trim();
     const ln = document.getElementById("lastName").value.trim();
     const org = document.getElementById("organization").value.trim();
@@ -60,6 +59,29 @@ function updateQR() {
     const city = document.getElementById("city").value.trim();
     const zip = document.getElementById("zip").value.trim();
     const country = document.getElementById("country").value.trim();
+
+    let vCard = `BEGIN:VCARD\nVERSION:3.0\n`;
+    vCard += `N:${ln};${fn};;;\n`;
+    vCard += `FN:${fn} ${ln}\n`;
+    if (org) vCard += `ORG:${org}\n`;
+    if (pos) vCard += `TITLE:${pos}\n`;
+    if (phone) vCard += `TEL;TYPE=CELL:${phone}\n`;
+    if (workPhone) vCard += `TEL;TYPE=WORK:${workPhone}\n`;
+    if (email) vCard += `EMAIL:${email}\n`;
+    if (website) vCard += `URL:${website}\n`;
+
+    if (street || city || zip || country) {
+        vCard += `ADR;TYPE=WORK:;;${street};${city};;${zip};${country}\n`;
+    }
+
+    vCard += `END:VCARD`;
+    return vCard;
+}
+
+function updateQR() {
+    // 1. Get Contact values for UI
+    const fn = document.getElementById("firstName").value.trim();
+    const ln = document.getElementById("lastName").value.trim();
 
     // 2. Get Styling values
     const colorMain = document.getElementById("colorMain").value;
@@ -79,22 +101,8 @@ function updateQR() {
         previewName.style.display = "none";
     }
 
-    // 4. Construct vCard String (VCF 3.0)
-    let vCard = `BEGIN:VCARD\nVERSION:3.0\n`;
-    vCard += `N:${ln};${fn};;;\n`;
-    vCard += `FN:${fn} ${ln}\n`;
-    if (org) vCard += `ORG:${org}\n`;
-    if (pos) vCard += `TITLE:${pos}\n`;
-    if (phone) vCard += `TEL;TYPE=CELL:${phone}\n`;
-    if (workPhone) vCard += `TEL;TYPE=WORK:${workPhone}\n`;
-    if (email) vCard += `EMAIL:${email}\n`;
-    if (website) vCard += `URL:${website}\n`;
-
-    if (street || city || zip || country) {
-        vCard += `ADR;TYPE=WORK:;;${street};${city};;${zip};${country}\n`;
-    }
-
-    vCard += `END:VCARD`;
+    // 4. Get vCard String
+    const vCard = getVCardData();
 
     // 5. Update QR Code Options
     qrCode.update({
@@ -109,14 +117,45 @@ function updateQR() {
     });
 }
 
+// Logo Upload Logic
+document.getElementById("logoInput").addEventListener("change", (event) => {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            qrCode.update({
+                image: e.target.result,
+            });
+        };
+        reader.readAsDataURL(file);
+    } else {
+        qrCode.update({
+            image: "",
+        });
+    }
+});
+
+// Download VCF Button Logic
+document.getElementById("downloadVcfBtn").addEventListener("click", () => {
+    const vCard = getVCardData();
+    const fn = document.getElementById("firstName").value.trim() || "contact";
+    const blob = new Blob([vCard], { type: "text/vcard" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${fn}.vcf`;
+    link.click();
+});
+
 // Download Button Logic
 document.getElementById("downloadBtn").addEventListener("click", () => {
     const element = document.getElementById("printArea");
     const fn = document.getElementById("firstName").value || "contact";
+    const scale =
+        parseInt(document.getElementById("resolutionScale").value) || 2;
 
     html2canvas(element, {
         backgroundColor: null,
-        scale: 2,
+        scale: scale,
     }).then((canvas) => {
         const link = document.createElement("a");
         link.download = `${fn}-vcard.png`;
