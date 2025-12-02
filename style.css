@@ -6,7 +6,7 @@
     --text-muted: #6b7280;
     --border: #e5e7eb;
     --radius: 12px;
-    --font-family: 'Inter', sans-serif;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 * {
@@ -288,69 +288,167 @@ select:focus {
 
 /* --- Frame Styles --- */
 
-/* 1. Simple */
+/* 1. Simple / Clean */
 .frame-simple {
     border-radius: var(--radius);
     border: 1px solid var(--border);
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+    background: white;
 }
 
-/* 2. Portrait / Polaroid */
+/* 2. Modern (Gradient Border) */
+.frame-modern {
+    position: relative;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.15);
+    padding: 3px;
+    /* Space for the gradient border */
+    background-image: linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+}
+
+.frame-modern .frame-content {
+    background: white;
+    border-radius: 17px;
+    padding: 2rem;
+    height: 100%;
+}
+
+/* 3. Polaroid */
 .frame-polaroid {
     background-color: #ffffff;
-    padding: 1.5rem 1.5rem 4rem 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem 1.5rem 5rem 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     border: 1px solid #e5e7eb;
+    transform: rotate(-1deg);
+    /* Slight tilt for realism */
 }
 
 .frame-polaroid .frame-content {
     border: 1px solid #f0f0f0;
     padding: 2rem;
     background: #fafafa;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-/* 3. Phone Frame */
-.frame-phone {
-    border: 8px solid #333;
-    border-radius: 30px;
-    padding: 2.5rem 1.5rem;
+/* 4. Badge / ID Card */
+.frame-badge {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.2);
     position: relative;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border-top: 8px solid var(--primary);
+}
+
+.frame-badge::before {
+    /* Hole punch */
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 6px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* 5. Phone Frame */
+.frame-phone {
+    border: 10px solid #1f2937;
+    border-radius: 36px;
+    padding: 3rem 1.5rem;
+    position: relative;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.2);
+    background: white;
 }
 
 .frame-phone::before {
+    /* Notch / Speaker */
     content: '';
     position: absolute;
-    top: 10px;
+    top: 12px;
     left: 50%;
     transform: translateX(-50%);
     width: 60px;
     height: 6px;
-    background: #333;
+    background: #1f2937;
     border-radius: 10px;
 }
 
-/* 4. Speech Bubble */
+/* 6. Speech Bubble */
 .frame-speech {
     border: 4px solid var(--primary);
-    border-radius: 20px;
+    border-radius: 24px;
+    border-bottom-left-radius: 4px;
+    /* Speech bubble tail effect */
     position: relative;
     box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.15);
+    background: white;
 }
 
 .frame-speech .scan-me-arrow {
     display: block;
     position: absolute;
-    top: -15px;
-    background: white;
-    padding: 0 10px;
+    top: -18px;
+    right: 20px;
+    background: var(--primary);
+    padding: 4px 12px;
     border-radius: 20px;
-    color: var(--primary);
-    border: 2px solid var(--primary);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 700;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
 }
 
 .frame-speech h3 {
     margin-top: 10px;
+}
+
+/* 7. Brutalism */
+.frame-brutalism {
+    border: 4px solid #000;
+    box-shadow: 8px 8px 0px #000;
+    border-radius: 0;
+    background: #fff;
+}
+
+.frame-brutalism .frame-content {
+    background: #fff;
+}
+
+.frame-brutalism h3 {
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: #000;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    display: inline-block;
+}
+
+/* 8. Neon */
+.frame-neon {
+    background: #0f0f0f;
+    border: 2px solid #ff00ff;
+    box-shadow: 0 0 15px rgba(255, 0, 255, 0.5);
+    border-radius: 16px;
+}
+
+.frame-neon .frame-content {
+    background: #0f0f0f;
+}
+
+.frame-neon h3 {
+    color: #fff;
+    text-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
+}
+
+.frame-neon .preview-name {
+    color: #fff;
+    text-shadow: 0 0 5px #00ffff;
 }
 
 /* Action Buttons */
@@ -467,4 +565,34 @@ select:focus {
     .scan-me-arrow {
         border: 2px solid #2563eb !important;
     }
+}
+
+/* Collapsible Settings */
+.collapsible-header {
+    cursor: pointer;
+    justify-content: space-between;
+    user-select: none;
+}
+
+.transition-icon {
+    transition: transform 0.3s ease;
+}
+
+.settings-content {
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 2000px;
+    opacity: 1;
+}
+
+.settings-content.collapsed {
+    max-height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+}
+
+.collapsible-header.collapsed .transition-icon {
+    transform: rotate(-90deg);
 }

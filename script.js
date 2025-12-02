@@ -168,3 +168,12 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
 document.getElementById("printBtn").addEventListener("click", () => {
     window.print();
 });
+
+// Settings Toggle Logic
+const settingsHeader = document.getElementById("settingsHeader");
+const settingsContent = document.getElementById("settingsContent");
+
+settingsHeader.addEventListener("click", () => {
+    settingsContent.classList.toggle("collapsed");
+    settingsHeader.classList.toggle("collapsed");
+});

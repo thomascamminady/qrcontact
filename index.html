@@ -3,13 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>vCard QR Generator</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-            rel="stylesheet"
-        />
+        <title>vCard QR Code Generator</title>
         <!-- Icon Library -->
         <link
             rel="stylesheet"
@@ -29,7 +23,7 @@
         <div class="app-container">
             <!-- Header with Top-Right GitHub Link -->
             <header>
-                <h1>Contact QR Generator</h1>
+                <h1>vCard QR Code Generator</h1>
                 <a
                     href="http://github.com/thomascamminady/qrcontact"
                     target="_blank"
@@ -116,126 +110,173 @@
                     </div>
 
                     <!-- 2. Combined Settings (Display + Styling) -->
-                    <div class="form-group-container">
-                        <h2>
-                            <i class="fa-solid fa-sliders"></i> Customization &
-                            Settings
+                    <div class="form-group-container" id="settingsContainer">
+                        <h2
+                            id="settingsHeader"
+                            class="collapsible-header collapsed"
+                        >
+                            <span
+                                ><i class="fa-solid fa-sliders"></i>
+                                Customization & Settings</span
+                            >
+                            <i
+                                class="fa-solid fa-chevron-down transition-icon"
+                            ></i>
                         </h2>
 
-                        <!-- Display Options Subsection -->
-                        <div class="subsection">
-                            <h3 class="subsection-title">Frame & Text</h3>
+                        <div
+                            id="settingsContent"
+                            class="settings-content collapsed"
+                        >
+                            <!-- Display Options Subsection -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">Frame & Text</h3>
 
-                            <div class="setting-row">
-                                <label>Call to Action</label>
-                                <input
-                                    type="text"
-                                    id="ctaText"
-                                    value="Scan to Save Contact"
-                                />
+                                <div class="setting-row">
+                                    <label>Call to Action</label>
+                                    <input
+                                        type="text"
+                                        id="ctaText"
+                                        value="Scan to Save Contact"
+                                    />
+                                </div>
+
+                                <div class="setting-row checkbox-row">
+                                    <label for="showNameToggle"
+                                        >Show Name below QR?</label
+                                    >
+                                    <input
+                                        type="checkbox"
+                                        id="showNameToggle"
+                                        checked
+                                    />
+                                </div>
+
+                                <label class="section-label">Frame Style</label>
+                                <div class="frame-selector">
+                                    <button
+                                        class="frame-btn active"
+                                        data-frame="simple"
+                                    >
+                                        Clean
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="modern"
+                                    >
+                                        Modern
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="polaroid"
+                                    >
+                                        Polaroid
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="badge"
+                                    >
+                                        Badge
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="phone"
+                                    >
+                                        Phone
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="speech"
+                                    >
+                                        "Scan Me"
+                                    </button>
+                                    <button
+                                        class="frame-btn"
+                                        data-frame="brutalism"
+                                    >
+                                        Brutal
+                                    </button>
+                                    <button class="frame-btn" data-frame="neon">
+                                        Neon
+                                    </button>
+                                </div>
                             </div>
 
-                            <div class="setting-row checkbox-row">
-                                <label for="showNameToggle"
-                                    >Show Name below QR?</label
-                                >
-                                <input
-                                    type="checkbox"
-                                    id="showNameToggle"
-                                    checked
-                                />
+                            <div class="divider"></div>
+
+                            <!-- QR Styling Subsection -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">
+                                    Colors & Shapes
+                                </h3>
+
+                                <div class="setting-row">
+                                    <label>QR Color</label>
+                                    <input
+                                        type="color"
+                                        id="colorMain"
+                                        value="#333333"
+                                    />
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>Background</label>
+                                    <input
+                                        type="color"
+                                        id="colorBg"
+                                        value="#ffffff"
+                                    />
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>Logo</label>
+                                    <input
+                                        type="file"
+                                        id="logoInput"
+                                        accept="image/*"
+                                    />
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>Dot Style</label>
+                                    <select id="dotStyle">
+                                        <option value="square">Square</option>
+                                        <option value="dots">Dots</option>
+                                        <option value="rounded">Rounded</option>
+                                        <option value="classy">Classy</option>
+                                    </select>
+                                </div>
+
+                                <div class="setting-row">
+                                    <label>Corner Style</label>
+                                    <select id="cornerStyle">
+                                        <option value="square">Square</option>
+                                        <option value="dot">Dot</option>
+                                        <option value="extra-rounded">
+                                            Extra Rounded
+                                        </option>
+                                    </select>
+                                </div>
                             </div>
 
-                            <label class="section-label">Frame Style</label>
-                            <div class="frame-selector">
-                                <button
-                                    class="frame-btn active"
-                                    data-frame="simple"
-                                >
-                                    Simple
-                                </button>
-                                <button class="frame-btn" data-frame="polaroid">
-                                    Portrait
-                                </button>
-                                <button class="frame-btn" data-frame="phone">
-                                    Phone
-                                </button>
-                                <button class="frame-btn" data-frame="speech">
-                                    "Scan Me"
-                                </button>
-                            </div>
-                        </div>
+                            <div class="divider"></div>
 
-                        <div class="divider"></div>
-
-                        <!-- QR Styling Subsection -->
-                        <div class="subsection">
-                            <h3 class="subsection-title">Colors & Shapes</h3>
-
-                            <div class="setting-row">
-                                <label>QR Color</label>
-                                <input
-                                    type="color"
-                                    id="colorMain"
-                                    value="#333333"
-                                />
-                            </div>
-
-                            <div class="setting-row">
-                                <label>Background</label>
-                                <input
-                                    type="color"
-                                    id="colorBg"
-                                    value="#ffffff"
-                                />
-                            </div>
-
-                            <div class="setting-row">
-                                <label>Logo</label>
-                                <input
-                                    type="file"
-                                    id="logoInput"
-                                    accept="image/*"
-                                />
-                            </div>
-
-                            <div class="setting-row">
-                                <label>Dot Style</label>
-                                <select id="dotStyle">
-                                    <option value="square">Square</option>
-                                    <option value="dots">Dots</option>
-                                    <option value="rounded">Rounded</option>
-                                    <option value="classy">Classy</option>
-                                </select>
-                            </div>
-
-                            <div class="setting-row">
-                                <label>Corner Style</label>
-                                <select id="cornerStyle">
-                                    <option value="square">Square</option>
-                                    <option value="dot">Dot</option>
-                                    <option value="extra-rounded">
-                                        Extra Rounded
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="divider"></div>
-
-                        <!-- Export Subsection -->
-                        <div class="subsection">
-                            <h3 class="subsection-title">Export Settings</h3>
-                            <div class="setting-row">
-                                <label>Resolution (Scale)</label>
-                                <select id="resolutionScale">
-                                    <option value="1">1x (Low)</option>
-                                    <option value="2">2x (Medium)</option>
-                                    <option value="4" selected>
-                                        4x (High)
-                                    </option>
-                                    <option value="8">8x (Ultra)</option>
-                                </select>
+                            <!-- Export Subsection -->
+                            <div class="subsection">
+                                <h3 class="subsection-title">
+                                    Export Settings
+                                </h3>
+                                <div class="setting-row">
+                                    <label>Resolution (Scale)</label>
+                                    <select id="resolutionScale">
+                                        <option value="1">1x (Low)</option>
+                                        <option value="2">2x (Medium)</option>
+                                        <option value="4" selected>
+                                            4x (High)
+                                        </option>
+                                        <option value="8">8x (Ultra)</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                     </div>
