@@ -451,6 +451,151 @@ select:focus {
     text-shadow: 0 0 5px #00ffff;
 }
 
+/* 9. Sketch */
+.frame-sketch {
+    border: 3px solid #333;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    background: #fff;
+    box-shadow: 2px 3px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.frame-sketch::before {
+    content: '';
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(1deg);
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.frame-sketch .frame-content {
+    position: relative;
+    z-index: 1;
+}
+
+/* 10. Coupon */
+.frame-coupon {
+    background: #fff;
+    border: 2px dashed #9ca3af;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.frame-coupon::before,
+.frame-coupon::after {
+    content: '';
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    background-color: #f3f4f6;
+    /* Match page bg if possible, or white/transparent */
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Since we can't easily match the external background, let's make them look like cutouts with a border */
+    border: 2px dashed #9ca3af;
+    z-index: 1;
+}
+
+.frame-coupon::before {
+    left: -12px;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    background: white;
+    /* Fallback */
+}
+
+.frame-coupon::after {
+    right: -12px;
+    border-left-color: transparent;
+    border-top-color: transparent;
+    border-bottom-color: transparent;
+    background: white;
+}
+
+/* 11. Vintage */
+.frame-vintage {
+    background-color: #fdf6e3;
+    border: 8px double #8b4513;
+    border-radius: 4px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.frame-vintage h3 {
+    font-family: 'Courier New', Courier, monospace;
+    color: #5d4037;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 1px solid #5d4037;
+    padding-bottom: 5px;
+    display: inline-block;
+}
+
+.frame-vintage .preview-name {
+    font-family: 'Courier New', Courier, monospace;
+    color: #5d4037;
+}
+
+/* 12. Terminal */
+.frame-terminal {
+    background-color: #1e1e1e;
+    border: 2px solid #33ff00;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(51, 255, 0, 0.2);
+    color: #33ff00;
+}
+
+.frame-terminal .frame-content {
+    background-color: #1e1e1e;
+}
+
+.frame-terminal h3,
+.frame-terminal p,
+.frame-terminal .preview-name {
+    color: #33ff00 !important;
+    font-family: monospace;
+}
+
+.frame-terminal h3::before {
+    content: '> ';
+}
+
+/* 13. Notebook */
+.frame-notebook {
+    background: #fff;
+    background-image: linear-gradient(#e5e7eb 1px, transparent 1px);
+    background-size: 100% 24px;
+    border: 1px solid #d1d5db;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+    padding-left: 3rem;
+    position: relative;
+}
+
+.frame-notebook::before {
+    content: '';
+    position: absolute;
+    left: 2.5rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #ef4444;
+}
+
+.frame-notebook h3 {
+    background: white;
+    display: inline-block;
+    padding: 0 5px;
+}
+
 /* Action Buttons */
 .actions {
     display: grid;
