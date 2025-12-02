@@ -1,0 +1,470 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --card-bg: #ffffff;
+    --text-main: #1f2937;
+    --text-muted: #6b7280;
+    --border: #e5e7eb;
+    --radius: 12px;
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-family);
+    background: #ffffff;
+    /* Clean white background */
+    color: var(--text-main);
+    line-height: 1.5;
+    min-height: 100vh;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Header & GitHub Logo */
+header {
+    position: relative;
+    /* For absolute positioning of github logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding: 1rem 0;
+}
+
+header h1 {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: var(--primary);
+    /* Title matches Download Button */
+    letter-spacing: -0.02em;
+}
+
+.github-link {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.75rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+}
+
+.github-link:hover {
+    color: var(--primary);
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 3rem;
+    align-items: start;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group-container {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--radius);
+    /* Added border since background is white */
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+h2 {
+    font-size: 1.15rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--text-main);
+}
+
+h2 i {
+    color: var(--primary);
+}
+
+/* Subsections inside consolidated settings */
+.subsection-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+}
+
+.divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1.5rem 0;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.2s;
+    background-color: #f9fafb;
+    /* Slight grey input background for contrast */
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.address-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+.setting-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.checkbox-row {
+    justify-content: flex-start;
+    gap: 1rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+}
+
+.checkbox-row input {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.setting-row input[type="color"] {
+    width: 50px;
+    padding: 2px;
+    height: 35px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.setting-row select {
+    width: 60%;
+    margin-bottom: 0;
+}
+
+/* Frame Selector */
+.section-label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.frame-selector {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+}
+
+.frame-btn {
+    background: #f3f4f6;
+    border: 2px solid transparent;
+    padding: 0.6rem 0.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transition: all 0.2s;
+    color: var(--text-muted);
+}
+
+.frame-btn:hover {
+    background: #e5e7eb;
+}
+
+.frame-btn.active {
+    background: #eff6ff;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+/* Preview Area */
+.preview-area {
+    position: relative;
+}
+
+.sticky-wrapper {
+    position: sticky;
+    top: 2rem;
+}
+
+/* The Capture Container (The Card Itself) */
+.capture-container {
+    background: white;
+    margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.frame-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.capture-container h3 {
+    margin-bottom: 1rem;
+    font-weight: 700;
+    color: var(--text-main);
+    word-break: break-word;
+    max-width: 100%;
+}
+
+.qr-wrapper {
+    display: inline-block;
+}
+
+.preview-name {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    margin-top: 1rem;
+}
+
+.scan-me-arrow {
+    display: none;
+    margin-top: 0.5rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+/* --- Frame Styles --- */
+
+/* 1. Simple */
+.frame-simple {
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+/* 2. Portrait / Polaroid */
+.frame-polaroid {
+    background-color: #ffffff;
+    padding: 1.5rem 1.5rem 4rem 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e5e7eb;
+}
+
+.frame-polaroid .frame-content {
+    border: 1px solid #f0f0f0;
+    padding: 2rem;
+    background: #fafafa;
+}
+
+/* 3. Phone Frame */
+.frame-phone {
+    border: 8px solid #333;
+    border-radius: 30px;
+    padding: 2.5rem 1.5rem;
+    position: relative;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+}
+
+.frame-phone::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 6px;
+    background: #333;
+    border-radius: 10px;
+}
+
+/* 4. Speech Bubble */
+.frame-speech {
+    border: 4px solid var(--primary);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.15);
+}
+
+.frame-speech .scan-me-arrow {
+    display: block;
+    position: absolute;
+    top: -15px;
+    background: white;
+    padding: 0 10px;
+    border-radius: 20px;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.frame-speech h3 {
+    margin-top: 10px;
+}
+
+/* Action Buttons */
+.actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.btn {
+    border: none;
+    padding: 0.85rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn.primary {
+    background-color: var(--primary);
+    color: white;
+}
+
+.btn.primary:hover {
+    background-color: var(--primary-hover);
+}
+
+.btn.secondary {
+    background-color: white;
+    border: 1px solid var(--border);
+    color: var(--text-main);
+}
+
+.btn.secondary:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    main {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-wrapper {
+        position: static;
+    }
+
+    .github-link {
+        top: 0;
+        right: 0;
+        position: absolute;
+        padding: 1rem;
+    }
+}
+
+/* Print Styling */
+@media print {
+    body {
+        background: white;
+        min-height: auto;
+    }
+
+    header,
+    .controls,
+    footer,
+    .actions {
+        display: none !important;
+    }
+
+    .app-container {
+        padding: 0;
+        margin: 0;
+        max-width: none;
+    }
+
+    main {
+        display: block;
+    }
+
+    .preview-area {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .capture-container {
+        box-shadow: none !important;
+        border: none !important;
+        transform: scale(1.2);
+    }
+
+    .frame-phone {
+        border: 8px solid #333 !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .frame-speech {
+        border: 4px solid #2563eb !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .scan-me-arrow {
+        border: 2px solid #2563eb !important;
+    }
+}

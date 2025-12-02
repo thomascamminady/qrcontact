@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>vCard QR Generator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+            rel="stylesheet"
+        />
+        <!-- Icon Library -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link rel="stylesheet" href="style.css" />
+
+        <!-- QR Code Library -->
+        <script
+            type="text/javascript"
+            src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"
+        ></script>
+        <!-- HTML2Canvas -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    </head>
+    <body>
+        <div class="app-container">
+            <!-- Header with Top-Right GitHub Link -->
+            <header>
+                <h1>Contact QR Generator</h1>
+                <a
+                    href="http://github.com/thomascamminady/qrcontact"
+                    target="_blank"
+                    class="github-link"
+                    title="View on GitHub"
+                >
+                    <i class="fa-brands fa-github"></i>
+                </a>
+            </header>
+
+            <main>
+                <!-- Left Side: Inputs -->
+                <section class="controls">
+                    <!-- 1. Details -->
+                    <div class="form-group-container">
+                        <h2>
+                            <i class="fa-solid fa-user"></i> Contact Details
+                        </h2>
+                        <div class="input-group">
+                            <input
+                                type="text"
+                                id="firstName"
+                                placeholder="First Name"
+                            />
+                            <input
+                                type="text"
+                                id="lastName"
+                                placeholder="Last Name"
+                            />
+                        </div>
+                        <input
+                            type="text"
+                            id="organization"
+                            placeholder="Organization / Company"
+                        />
+                        <input
+                            type="text"
+                            id="position"
+                            placeholder="Job Title"
+                        />
+                        <div class="input-group">
+                            <input
+                                type="tel"
+                                id="phone"
+                                placeholder="Mobile Phone"
+                            />
+                            <input
+                                type="tel"
+                                id="workPhone"
+                                placeholder="Work Phone"
+                            />
+                        </div>
+                        <input
+                            type="email"
+                            id="email"
+                            placeholder="Email Address"
+                        />
+                        <input
+                            type="url"
+                            id="website"
+                            placeholder="Website (https://...)"
+                        />
+
+                        <div class="address-grid">
+                            <input
+                                type="text"
+                                id="street"
+                                placeholder="Street Address"
+                                class="full-width"
+                            />
+                            <input type="text" id="city" placeholder="City" />
+                            <input
+                                type="text"
+                                id="zip"
+                                placeholder="Zip Code"
+                            />
+                            <input
+                                type="text"
+                                id="country"
+                                placeholder="Country"
+                                class="full-width"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- 2. Combined Settings (Display + Styling) -->
+                    <div class="form-group-container">
+                        <h2>
+                            <i class="fa-solid fa-sliders"></i> Customization &
+                            Settings
+                        </h2>
+
+                        <!-- Display Options Subsection -->
+                        <div class="subsection">
+                            <h3 class="subsection-title">Frame & Text</h3>
+
+                            <div class="setting-row">
+                                <label>Call to Action</label>
+                                <input
+                                    type="text"
+                                    id="ctaText"
+                                    value="Scan to Save Contact"
+                                />
+                            </div>
+
+                            <div class="setting-row checkbox-row">
+                                <label for="showNameToggle"
+                                    >Show Name below QR?</label
+                                >
+                                <input
+                                    type="checkbox"
+                                    id="showNameToggle"
+                                    checked
+                                />
+                            </div>
+
+                            <label class="section-label">Frame Style</label>
+                            <div class="frame-selector">
+                                <button
+                                    class="frame-btn active"
+                                    data-frame="simple"
+                                >
+                                    Simple
+                                </button>
+                                <button class="frame-btn" data-frame="polaroid">
+                                    Portrait
+                                </button>
+                                <button class="frame-btn" data-frame="phone">
+                                    Phone
+                                </button>
+                                <button class="frame-btn" data-frame="speech">
+                                    "Scan Me"
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="divider"></div>
+
+                        <!-- QR Styling Subsection -->
+                        <div class="subsection">
+                            <h3 class="subsection-title">Colors & Shapes</h3>
+
+                            <div class="setting-row">
+                                <label>QR Color</label>
+                                <input
+                                    type="color"
+                                    id="colorMain"
+                                    value="#333333"
+                                />
+                            </div>
+
+                            <div class="setting-row">
+                                <label>Background</label>
+                                <input
+                                    type="color"
+                                    id="colorBg"
+                                    value="#ffffff"
+                                />
+                            </div>
+
+                            <div class="setting-row">
+                                <label>Dot Style</label>
+                                <select id="dotStyle">
+                                    <option value="square">Square</option>
+                                    <option value="dots">Dots</option>
+                                    <option value="rounded">Rounded</option>
+                                    <option value="classy">Classy</option>
+                                </select>
+                            </div>
+
+                            <div class="setting-row">
+                                <label>Corner Style</label>
+                                <select id="cornerStyle">
+                                    <option value="square">Square</option>
+                                    <option value="dot">Dot</option>
+                                    <option value="extra-rounded">
+                                        Extra Rounded
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Side: Preview -->
+                <section class="preview-area">
+                    <div class="sticky-wrapper">
+                        <div
+                            id="printArea"
+                            class="capture-container frame-simple"
+                        >
+                            <div class="frame-content">
+                                <h3 id="previewCTA">Scan to Save Contact</h3>
+                                <div class="qr-wrapper">
+                                    <div id="canvas"></div>
+                                </div>
+                                <p class="preview-name" id="previewNameText">
+                                    Your Name
+                                </p>
+                                <div class="scan-me-arrow">
+                                    Scan Me
+                                    <i class="fa-solid fa-arrow-down"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+                            <button id="downloadBtn" class="btn primary">
+                                <i class="fa-solid fa-download"></i> Download
+                                Image
+                            </button>
+                            <button id="printBtn" class="btn secondary">
+                                <i class="fa-solid fa-print"></i> Print
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
