@@ -98,6 +98,28 @@ function updateQR() {
     const cornerStyle = document.getElementById("cornerStyle").value;
     const ctaText = ctaInput.value.trim();
 
+    // Check if any data fields have content
+    const dataFields = [
+        "firstName",
+        "lastName",
+        "organization",
+        "position",
+        "phone",
+        "workPhone",
+        "email",
+        "website",
+        "street",
+        "city",
+        "zip",
+        "country",
+    ];
+    const hasData = dataFields.some(
+        (id) => document.getElementById(id).value.trim() !== ""
+    );
+
+    // If no data, hide the dots (make them transparent), but keep corners visible
+    const dotsColor = hasData ? colorMain : "transparent";
+
     // 3. Update Text UI
     const fullName = `${fn} ${ln}`.trim();
     previewName.textContent = fullName || "Your Name";
@@ -115,7 +137,7 @@ function updateQR() {
     // 5. Update QR Code Options
     qrCode.update({
         data: vCard,
-        dotsOptions: { color: colorMain, type: dotStyle },
+        dotsOptions: { color: dotsColor, type: dotStyle },
         backgroundOptions: { color: colorBg },
         cornersSquareOptions: { color: colorMain, type: cornerStyle },
         cornersDotOptions: {
