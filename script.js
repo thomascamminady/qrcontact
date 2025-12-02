@@ -85,7 +85,15 @@ function updateQR() {
 
     // 2. Get Styling values
     const colorMain = document.getElementById("colorMain").value;
-    const colorBg = document.getElementById("colorBg").value;
+    const colorBgInput = document.getElementById("colorBg");
+    const isTransparent = document.getElementById("bgTransparent").checked;
+
+    // Handle Transparency UI
+    colorBgInput.disabled = isTransparent;
+    colorBgInput.style.opacity = isTransparent ? "0.5" : "1";
+    colorBgInput.style.cursor = isTransparent ? "not-allowed" : "pointer";
+
+    const colorBg = isTransparent ? "transparent" : colorBgInput.value;
     const dotStyle = document.getElementById("dotStyle").value;
     const cornerStyle = document.getElementById("cornerStyle").value;
     const ctaText = ctaInput.value.trim();
